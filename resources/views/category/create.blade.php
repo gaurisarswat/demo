@@ -2,5 +2,7 @@
 <form action="/category" method="post">
     @csrf
     {{-- Cross Site Request Forgery --}}
-    <button>Go</button>
+    Name: <input type="text" name="name"><br>
+    Description: <textarea name="description"></textarea><br>
+    <button>Save</button>
 </form>

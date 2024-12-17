@@ -16,4 +16,4 @@ Route::resource('/category', CategoryController::class);
 // Route::get('/category/{id}', [CategoryController::class,"show"]);
 // Route::get('/category/{id}/edit', [CategoryController::class,"edit"]);
 // Route::put('/category/{id}', [CategoryController::class,"update"]);
-// Route::delete('/category/{id}', [CategoryController::class,"destroy"]);
+// Route::delete('/category/{id}', [CategoryController::class,"destroy"]); in laravel we have to make form for delete we can't do this job with get method

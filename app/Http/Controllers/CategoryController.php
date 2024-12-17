@@ -12,7 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return "index";
+        $data=Category::all(); // what is difference between attributes and original in dd() ??
+        return view("category.index",['data'=>$data]);
+        // return view("category.index",compact($data));
     }
 
     /**
@@ -28,7 +30,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return "store";
+        $info=[
+            'name'=>$request->name,
+            'description'=>$request['description']
+        ];
+        // dd($info); //this is used to show data and then perform exit() function and stop execution
+        
+        Category::create($info); // this "Category" is accessible only because of line no. 5 if we don't write that thing then it will show error
+        return redirect("/category")->with("success","Data Saved Successfully!!");
     }
 
     /**
@@ -44,24 +53,35 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return "edit";
+        // dd($category);
+        return view("category.edit",['info'=>$category]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,Category $category) // we can also do this with $id like line 79
     {
-        return "update";
+        // dd($request);
+        // dd($category);
+        // $category=Category::find($id); //this will fetch single record 
+        $category->name=$request->name;
+        $category->description=$request->description;
+        $category->save(); 
+        // dd($category);
+        return redirect("/category")->with("success","Data Updated Successfully!!");
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        return "destroy";
-
+        // dd($id);
+        $category=Category::find($id); //this will fetch single record
+        $category->delete();
+        return redirect("/category")->with("success","Data Deleted Successfully!!");
+        // dd($category);
     }
 }
